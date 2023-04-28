@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Books;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -61,7 +62,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $model = new Books();
+        return $this->render('index',[
+            'model'=>$model->findAll()
+        ]);
     }
 
     /**
@@ -76,11 +80,13 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
+        
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
 
         $model->password = '';
+        
         return $this->render('login', [
             'model' => $model,
         ]);
@@ -99,30 +105,45 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays contact page.
+     * Nuevo Catalogo page.
      *
      * @return Response|string
      */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
 
-            return $this->refresh();
+     public function actionNew()
+     {
+        $model = new Books();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->goHome();
         }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
 
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
+        return $this->render('new',[
+            'model' => $model
+        ]);
+     }
+
+     public function actionUpdate()
+     {
+        $model = new Books();
+        $request = Yii::$app->request;
+
+        $model->getBook($request->get('id'));
+
+        if ($model->load(Yii::$app->request->post()) && $model->Update()) {
+            return $this->goHome();
+        }
+
+        return $this->render('update',[
+            'model' => $model
+        ]);
+     }
+
+     public function actionDelete()
+     {
+        $model = new Books();
+        $request = Yii::$app->request;
+        $model->deleteBook($request->get('id'));
+        return $this->goHome();
+     }
 }
