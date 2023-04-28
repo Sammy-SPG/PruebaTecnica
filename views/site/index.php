@@ -24,8 +24,8 @@ use yii\bootstrap5\Html;
                             if(!Yii::$app->user->isGuest) echo Nav::widget([
                                 'options' => ['class' => 'flex'],
                                 'items' =>  [
-                                    '<li class="nav-item">'. Html::beginForm(['/site/update', 'id' => $row->BARCODE]). Html::submitButton('Actualizar'). Html::endForm(). '</li>',
-                                    '<li class="nav-item">'. Html::beginForm(['/site/delete', 'id' => $row->BARCODE]). Html::submitButton('Eliminar'). Html::endForm(). '</li>'
+                                    '<li class="nav-item">'. Html::beginForm(['/site/update', 'id' => $row->BARCODE]). Html::submitButton('Actualizar', ['class'=>'btn btn-warning m-1']). Html::endForm(). '</li>',
+                                    '<li class="nav-item">'. Html::beginForm(['/site/delete', 'id' => $row->BARCODE]). Html::submitButton('Eliminar', ['class'=>'btn btn-danger m-1']). Html::endForm(). '</li>'
                                     ]
                             ]);
                             ?>

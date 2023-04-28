@@ -5,7 +5,7 @@
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
 
-$this->title = 'Crear un nuevo catalogo';
+$this->title = "Actualizar: ".$model->title;
 
 ?>
 <div class="site-index">
@@ -29,7 +29,7 @@ $this->title = 'Crear un nuevo catalogo';
         <?= $form->field($model, 'urlimg')->textInput(['maxlength' => true]) ?>
 
         <div class="form-group">
-            <div class="offset-lg-1 col-lg-11">
+            <div>
                 <?= Html::submitButton('Actualizar', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
         </div>

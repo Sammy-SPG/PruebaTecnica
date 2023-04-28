@@ -9,6 +9,7 @@ $this->title = 'Crear un nuevo catalogo';
 
 ?>
 <div class="site-index">
+<div class="newBook">
 <?php $form = ActiveForm::begin([
         'id' => 'login-form',
         'layout' => 'horizontal',
@@ -29,10 +30,11 @@ $this->title = 'Crear un nuevo catalogo';
         <?= $form->field($model, 'urlimg')->textInput(['maxlength' => true]) ?>
 
         <div class="form-group">
-            <div class="offset-lg-1 col-lg-11">
+            <div>
                 <?= Html::submitButton('Crear', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
         </div>
 
     <?php ActiveForm::end(); ?>
+</div>
 </div>
